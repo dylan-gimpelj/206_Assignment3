@@ -1,0 +1,23 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+//need to make a linked-list struct
+//with char[] word and struct linked-list *next 
+struct linked {
+	char word[];
+	struct linked *next; 
+};
+
+typedef struct linked userswords; 
+
+
+void main(){
+printf("Welcome to the infinite string storage program"); 
+printf("Please input a single word."); 
+
+//while(input != "***END***")
+{
+//store word in struct linked_list, only take first word, so once space or enter, terminate
+//the *next of LAST string must be its memory location, comment faire? 
+//
+

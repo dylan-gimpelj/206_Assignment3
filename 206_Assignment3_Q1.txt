@@ -1,0 +1,75 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+//new plan!
+//use readLine, take each line into a string, traverse it and split up into
+//name, data entries into array. Way easier! 
+//still use while !=EOF, but within, use readLine, do all the steps for each readline char[]
+
+
+//use FILE ptr to locate txt file
+//use fopen function 
+FILE *ptr;
+char *line = NULL; 
+int len = 0;
+int read; 
+ptr = fopen("DATA.txt", "r"); //only have to read not manipulate data.
+int c;
+char[] entry; 
+double[] total; 
+
+if(ptr==NULL){
+	exit(EXIT_FAILURE);
+		}
+while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
+//use readLine to traverse file line by line, easier to extract names and data
+
+	while((read=getline(&line, &len, ptr))!=-1){
+		printf("This is a test to see if it traverses each line of the text 
+//first though traverse string, once first comma hit then go through #/, checking
+		if((c>65&&c<91)||(c>96&&c<123)||(c==32)) /* if name of researcher */
+		{
+			char name[2]; 
+		
+		 //does this work? 
+		} 
+		else if (c==','){ //ready to move into #/, checking
+		continue; 
+			}
+		
+	
+		if(c==',') //char[] ready to be converted into Double
+		{
+	//need to reset entry, make it empty so next data entry after , can fill it 
+			double add = Double.parse(entry);
+			//add double to []
+			boolean doubcheck = false;
+			while(doubcheck==false){
+				int czech=0;
+				if(total[czech]==null)
+				{
+					total[czech]=add;
+					doubcheck=true; 
+				}
+		
+			}
+		}
+		else if(c>47&&c<58){ //it's part of a data entry (if it's >9 basically (48-57 ascii )
+	//while char not , record chars to form int, add to int[]
+			entry = entry+c; //how to do this properly! 
+		
+			}	
+		
+//now find average of values and print out with name of researcher
+	double sum=0;
+	double avg=0;
+	for(int i =0; i<total.length;i++){
+		sum = sum + total[i];
+	}
+	avg=(sum/(total.length)); 
+	printf(name + " " + sum); 
+	
+	}
+	
+}
+	
