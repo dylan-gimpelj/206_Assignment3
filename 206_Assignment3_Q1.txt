@@ -10,23 +10,25 @@
 //use FILE ptr to locate txt file
 //use fopen function 
 FILE *ptr;
-char *line = NULL; 
-int len = 0;
+char *line; 
+size_t len;
 int read; 
-ptr = fopen("DATA.txt", "r"); //only have to read not manipulate data.
 int c;
 char[] entry; 
 double[] total; 
 
-if(ptr==NULL){
-	exit(EXIT_FAILURE);
-		}
+int main(){
 while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
 //use readLine to traverse file line by line, easier to extract names and data
-
-	while((read=getline(&line, &len, ptr))!=-1){
-		printf("This is a test to see if it traverses each line of the text 
-//first though traverse string, once first comma hit then go through #/, checking
+	ptr = fopen("DATA.txt", "r"); //only have to read not manipulate data.
+	if(ptr==NULL){
+	exit(EXIT_FAILURE);
+		}
+	while(read=getline(&line, &len, ptr)){
+		//until first ,  add into name char*
+		//once first comma, start adding into entry, parse into double, add to total.
+		//once endline reached, add sum of total, divide by number of entries, printf(string+number)
+		//repeat for all lines of the txt file. 
 		if((c>65&&c<91)||(c>96&&c<123)||(c==32)) /* if name of researcher */
 		{
 			char name[2]; 
@@ -71,5 +73,7 @@ while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
 	
 	}
 	
+}
+return 0;
 }
 	
