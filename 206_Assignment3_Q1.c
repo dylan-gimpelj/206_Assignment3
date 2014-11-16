@@ -36,17 +36,12 @@ int lengthdoub(const double array[]) {
 
 int main(){
 ptr = fopen("scantest.txt", "r"); 
-len=1000;
+len=100;
 line = (char *)malloc(100); 
-while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
-	if(ptr==NULL){
-	exit(EXIT_FAILURE);
-		}
-	while(fgets(line, len, ptr)!=NULL){
-		 
-		leng = length(line);
-		
-		for(i=0;i<leng;i++){
+	while((fgets(line, len, ptr)!=NULL)){
+		//leng = length(line);
+		printf("Passed a line scan"); 
+		for(i=0;i<100;i++){
 		//until first ,  add into name char*
 		//once first comma, start adding into entry, parse into double, add to total.
 		//once endline reached, add sum of total, divide by number of entries, printf(string+number)
@@ -56,12 +51,13 @@ while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
 		{
 			 
 			name[i]=line[i]; //since name at beginning of line can assume at same point.  
-		
-		 //does this work? 
+			printf("%c", line[i]); 
+			printf("This may be where the inf loop is");
+		 
 		} 
 		else if(line[i]==',') //char[] ready to be converted into Double, clear entry[]
 		{
-			//printf("Is a comma"); 
+			printf(","); 
 			//need to reset entry, make it empty so next data entry after , can fill it 
 			double add = atof(entry);
 			//add double to []
@@ -73,20 +69,24 @@ while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
 			entry[i]==NULL;
 			}
 		}
+		printf("This may be where the loop is");
 		}
 		else if(line[i]>47&&line[i]<58)
 			{ //it's part of a data entry (if it's >9 basically (48-57 ascii ) 
+				printf("%c", line[i]); 
 				for(i=0; i<10;i++){
 					if(entry[i]==NULL){
 					entry[i]=line[i];
 					break;
 					}
 				}	
+			printf("This may be where the problem is"); 
 		}
-		leng1= lengtharr(name); 
-	for(i=0; i<leng1;i++){
-	printf("%c", name[i]);
-	}
+		else{ //some other irrelevant character 
+		i++;
+		}
+		//leng1= lengtharr(name); 
+	
 	//now find average of values and print out with name of researcher
 	//double sum=0;
 	//double avg=0;
@@ -101,7 +101,7 @@ while((c = fgetc(ptr)) != EOF){ /*while readable char still in file do program*/
 	 
 }
 
-}
+fclose(ptr); 
 return (0);
 }
 	
