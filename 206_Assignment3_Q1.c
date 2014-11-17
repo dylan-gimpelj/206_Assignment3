@@ -36,12 +36,15 @@ int lengthdoub(const double array[]) {
 
 int main(){
 ptr = fopen("scantest.txt", "r"); 
+printf("Opened file"); 
 len=100;
-line = (char *)malloc(100); 
+printf("Assigned len");
+line = (char *)malloc(100);
+printf("Assigned line");  
 	while((fgets(line, len, ptr)!=NULL)){
-		//leng = length(line);
 		printf("Passed a line scan"); 
-		for(i=0;i<100;i++){
+		leng = length(line);
+		for(i=0;i<leng;i++){
 		//until first ,  add into name char*
 		//once first comma, start adding into entry, parse into double, add to total.
 		//once endline reached, add sum of total, divide by number of entries, printf(string+number)
@@ -59,34 +62,32 @@ line = (char *)malloc(100);
 		{
 			printf(","); 
 			//need to reset entry, make it empty so next data entry after , can fill it 
-			double add = atof(entry);
+			//double add = atof(entry);
 			//add double to []
-			for(i=0;i<100;i++){
-				if(total[i]==0.0){
-					total[i]=add;
-				}
-			for(i=0;i<10;i++){//clear the entry [] for the next entry
-			entry[i]==NULL;
-			}
-		}
-		printf("This may be where the loop is");
+			//for(i=0;i<100;i++){
+				//if(total[i]==0.0){
+					//total[i]=add;
+				//}
+			//for(i=0;i<10;i++){//clear the entry [] for the next entry
+			//entry[i]==NULL;
+			//}
 		}
 		else if(line[i]>47&&line[i]<58)
 			{ //it's part of a data entry (if it's >9 basically (48-57 ascii ) 
 				printf("%c", line[i]); 
-				for(i=0; i<10;i++){
-					if(entry[i]==NULL){
-					entry[i]=line[i];
-					break;
-					}
+				//for(i=0; i<10;i++){
+					//if(entry[i]==NULL){
+					//entry[i]=line[i];
+					//break;
+					//}
 				}	
-			printf("This may be where the problem is"); 
-		}
+			//printf("This may be where the problem is"); 
+		
 		else{ //some other irrelevant character 
 		i++;
 		}
 		//leng1= lengtharr(name); 
-	
+	}
 	//now find average of values and print out with name of researcher
 	//double sum=0;
 	//double avg=0;
@@ -98,9 +99,6 @@ line = (char *)malloc(100);
 	//printf(name + " " + sum); 
 	//clear all arrays/pointers
 	}
-	 
-}
-
 fclose(ptr); 
 return (0);
 }

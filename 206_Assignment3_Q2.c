@@ -6,7 +6,7 @@
 char *prompt;
 char *command;
 char *command1; 
-char *subcmd1;
+char *sub1;
 char *sub2; 
 int i;
 int x;
@@ -26,10 +26,15 @@ while(x==5){
 			command1[i]=tolower(command[i]);
 			i++; 
 			}
-	
+	i=0;
 	if(strncmp(command1,"set prompt", 10)==0)
 	{
-		prompt = command; 
+		i=11;
+		while(command[i]!=NULL){
+			sub1[i-11] = command[i];
+			i++;
+		}
+		prompt = sub1; 
 	}
 	else if(strncmp(command1, "quit", 4)==0){
 		x=0; 
@@ -37,30 +42,6 @@ while(x==5){
 	else {
 		printf("Something else"); 
 	}
-	
-//have to also split string to check "set prompt"
-//memcpy(subcmd1, &command1[0], 9); 
-//subcm1[9]= '\0';
-// potword = siphonstring(10-end);
- //need efficient way to scan until end of words/input 
-//also could siphon to check if ==quit
-	//memcpy(cmdquit, &command1[0], 3);
-	//cmdquit[3]='\0';
-	
-	
-	//if(subcmd1.equals("set prompt"))
-	//{//get substring of scanned char[] only word-simply siphon the original scanf string, take the second part!
-		//prompt = potword;
-	//}
-	//else if(cmdquit.equals("quit")
-	//{
-		//break; //return to unix command line
-	//}
-	//else{//export to unix command line through system() fx
-		//char cmd[50];
-		//strcpy(cmd, scanf("c", &command1)); 
-		//system(cmd); ?
-	//}
 }
 return(0); 
 }
