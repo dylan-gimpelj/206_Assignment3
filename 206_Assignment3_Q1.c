@@ -10,11 +10,14 @@ size_t len;
 int read; 
 int c;
 char entry[10]; 
-double total[100]; 
-char name[30];
+char *entptr;
+double total; 
+char *name;
 int leng;
-int leng1; 
 int i;
+int j;
+int k; 
+double avg;
 
 int lengtharr(char array[]) {
   int count = 0;
@@ -28,76 +31,61 @@ int length(const char *array) {
   return count;
 }
 
-int lengthdoub(const double array[]) {
-  int count = 0;
-  while(array[count]) count++;
-  return count;
-}
-
 int main(){
 ptr = fopen("scantest.txt", "r"); 
-printf("Opened file"); 
+//printf("Opened file"); 
 len=100;
-printf("Assigned len");
+//printf("Assigned len");
 line = (char *)malloc(100);
-printf("Assigned line");  
+name = (char *)malloc(50);
+entptr = (char*)malloc(10); 
+total=0.0;
+avg=0.0; 
 	while((fgets(line, len, ptr)!=NULL)){
-		printf("Passed a line scan"); 
-		leng = length(line);
-		for(i=0;i<leng;i++){
-		//until first ,  add into name char*
-		//once first comma, start adding into entry, parse into double, add to total.
-		//once endline reached, add sum of total, divide by number of entries, printf(string+number)
-		//repeat for all lines of the txt file. 
-		//name: 32-47, 58-126
+		total =0.0;
+		leng=0; 
+		for(i=0;i<100;i++){
 		if(((line[i]>31&&line[i]<48)||(line[i]>57&&line[i]<127))&&(line[i]!=44)) /* if name of researcher */
-		{
+		{//print checked, it works!
 			 
-			name[i]=line[i]; //since name at beginning of line can assume at same point.  
-			printf("%c", line[i]); 
-			printf("This may be where the inf loop is");
-		 
+			name[i]=line[i]; //since name at beginning of line can assume at same point.   		 
 		} 
-		else if(line[i]==',') //char[] ready to be converted into Double, clear entry[]
+		else if(line[i]==','||line[i]==NULL) //char[] ready to be converted into Double, clear entry[]
 		{
-			printf(","); 
+			
 			//need to reset entry, make it empty so next data entry after , can fill it 
-			//double add = atof(entry);
-			//add double to []
-			//for(i=0;i<100;i++){
-				//if(total[i]==0.0){
-					//total[i]=add;
-				//}
-			//for(i=0;i<10;i++){//clear the entry [] for the next entry
-			//entry[i]==NULL;
-			//}
+			entptr = entry; 
+			double add = atof(entptr);
+			//add double to sum
+			total = total+add; 
+			leng++;
+			for(j=0;j<10;j++){//clear the entry [] for the next entry
+			entry[j]=NULL;
+			}
+			if(line[i]==NULL){
+				i=100;
+				}
 		}
 		else if(line[i]>47&&line[i]<58)
 			{ //it's part of a data entry (if it's >9 basically (48-57 ascii ) 
-				printf("%c", line[i]); 
-				//for(i=0; i<10;i++){
-					//if(entry[i]==NULL){
-					//entry[i]=line[i];
-					//break;
-					//}
+				//printf("%c", line[i]); 
+				for(k=0; k<10;k++){
+					if(entry[k]==NULL){
+					entry[k]=line[i];
+					k=10; 
+					}
 				}	
-			//printf("This may be where the problem is"); 
-		
+			 
+			}
 		else{ //some other irrelevant character 
 		i++;
 		}
-		//leng1= lengtharr(name); 
+		
 	}
-	//now find average of values and print out with name of researcher
-	//double sum=0;
-	//double avg=0;
-	//leng=lengthdoub(total);
-	//for(int i =0; i<leng;i++){
-		//sum = sum + total[i];
-	//}
-	//avg=(sum/leng); 
-	//printf(name + " " + sum); 
-	//clear all arrays/pointers
+	avg = total/(leng-1); 
+	printf("%s", name);
+	printf(" "); 
+	printf("%.2f", avg); 
 	}
 fclose(ptr); 
 return (0);
