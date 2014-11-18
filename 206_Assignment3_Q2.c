@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 //DYLAN GIMPELJ 260519772 
-
+//free all malloc variables
 char *prompt;
 char *command;
 char *command1; 
@@ -44,6 +44,10 @@ while(x==5){
 		system(command); 
 	}
 }
+
+free(command);
+free(command1);
+free(sub1);
 return(0); 
 }
 

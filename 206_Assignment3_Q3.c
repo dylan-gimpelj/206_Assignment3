@@ -1,52 +1,68 @@
 #include <stdlib.h>
 #include <stdio.h>
-#IF ENGLISH
-#define ENGLISH
-#ELSE 
+#define ENGLISH 
 #define FRENCH
-//need to make a linked-list struct
-//with char[] word and struct linked-list *next 
+//So I know my code doesn't print out the words correctly, but I put in some printf checks
+//and it does assign the words properly in each loop to the latest node, but for some reason
+//on the last loop when ***END*** is entered it overwrites them all and prints it out as many times as there are 
+//nodes  
 struct node {
 	char *word;
 	struct node *next; 
-	srtruct node *prev; 
 };
 
-typedef struct node userswords; 
 char *input;
-int i;
+int i; 
+struct node* conduct; 
+struct node* tail; 
+struct node* root;  
 
-void main(){
-	struct node *root;
-	struct node *conduct; 
+int main(){
+	root = (struct node*)malloc(sizeof(struct node)); //set it "null", just as a initial start to the list
+	root->next = 0; 
+	root->word = "";
+	tail = (struct node*)malloc(sizeof(struct node)); 
+	tail = NULL;
 	input =(char*)malloc(100); 
 	printf("Welcome to the infinite string storage program!"); 
 	while(input != "***END***")
 	{
 		printf("Please input a single word."); 
-		fgets(input,100,stdin); //assume no word longer than 100 characters 
-		if(strcmp(input,"***END***, 9) == 0)
+		scanf("%s", input); //assume no word longer than 100 characters 
+		if(strcmp(input,"***END***") == 0)
 		{
 			break;
 		}
-		conduct.word = (char*)malloc(100); 
-		for(i=0; i<100;i++)
-		{
-			//65-90, 97-122
-			if((input[i]>64&&input[i]<91)||(input[i]>96&&input[i]<123)){
-				word[i] = input[i];
+		struct node *conduct = (struct node*)malloc(sizeof(struct node));
+		conduct->word = (char*)malloc(100);
+		conduct->word = input;
+		conduct->next = NULL; 
+		if(tail==NULL){
+				root = conduct;
+				tail = conduct;
+				//printf("Tail was null now filled with input"); 
 				}
-			else{//stop adding to the word char*
-				i=100; 
-			}
-		}
-		//need to make new struct node, with no next, empty word*
-		
+		else{
+			tail->next = conduct; 
+			tail = conduct; 
+			//printf("Tail changed to newest node"); 
+			}	
+		//printf("%s", input); //it does print input 
+		//printf("%s", tail->word);  
 	}
+	//printf("%s", root->word); 
 	//print out all words
-	while(conduct!=NULL){
-		printf("%s", conduct.word); 
-		conduct= conduct.next; 
+	conduct = root;
+	//printf("%s", conduct->word); 
+	while(conduct !=NULL){
+		printf("%s", conduct->word); 
+		conduct= conduct->next; 
 		}
-//
+		printf("Done!"); 
+		free(conduct);
+		free(input);
+		free(root);
+		
+	return(0);
+}
 
